@@ -2,9 +2,13 @@ import os
 import gradio as gr
 from openai import OpenAI
 
+api_key = os.getenv("OPENROUTER_API_KEY")
+if not api_key:
+    raise RuntimeError("Set the OPENROUTER_API_KEY environment variable before starting the app.")
+
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
-    api_key=os.environ.get("OPENROUTER_API_KEY")
+    api_key=api_key
 )
 
 def ask_student_assistant(message, history):
